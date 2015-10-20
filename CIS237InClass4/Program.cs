@@ -31,6 +31,16 @@ namespace CIS237InClass4
             Console.WriteLine();
             Console.WriteLine();
 
+            //Print out the 2nd One
+            Node nodeINeed = myLinkedList.Retrive(2);
+            Console.WriteLine(nodeINeed.Data);
+            Console.WriteLine("\n");
+
+            //Same as above
+            //Print out the 2nd one again in one statment
+            Console.WriteLine(myLinkedList.Retrive(2).Data);
+            Console.WriteLine("\n");
+
             //delete the 2nd element in the list
             myLinkedList.Delete(2);
 
@@ -41,7 +51,23 @@ namespace CIS237InClass4
             for (Node x = myLinkedList.Head; x != null; x = x.Next)
             {
                 Console.WriteLine(x.Data);
+                
             }
+
+            //couple of blank lines
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Add two new ones to the list
+            myLinkedList.Add("fifith");
+            myLinkedList.Add("sixth");
+
+
+            for (Node x = myLinkedList.Head; x != null; x = x.Next)
+            {
+                Console.WriteLine(x.Data);
+            }
+
 
         }
     }

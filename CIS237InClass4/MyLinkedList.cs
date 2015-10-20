@@ -11,6 +11,9 @@ namespace CIS237InClass4
         //private variable to hold the current position of where we are in the linked list
         private Node current;
 
+        //Private variable to hold the last postion of the linked list.
+        private Node last;
+
 
         //A public property that will point to the Head node (the first one in the list)
         public Node Head
@@ -43,11 +46,13 @@ namespace CIS237InClass4
                 //Not the first node, so set the new node to the current node's next variable
             else
             {
-                current.Next = node;
+               // current.Next = node; old code
+                last.Next = node;
             }
 
             //Move down the list. Set current to the new node we added.
-            current = node;
+           // current = node; old code
+            last = node;
 
         }
 
@@ -59,11 +64,9 @@ namespace CIS237InClass4
             current = Head;
 
             if (Position == 1)
-            {
+            {            
 
-               
-
-                //Set the Head to the next node in the list
+                //Set the Head to the next node in the list. This will be the 2nd one.
                 Head = current.Next;
 
                 //Delete the current.next pointer so there is no reference from current to another node
@@ -87,8 +90,8 @@ namespace CIS237InClass4
                 //move the Head pointer. We can just use the temp node.
                 Node tempNode = Head;
 
-                //Set a last node to null. It will be used for the delete
-                Node lastNode = null;
+                //Set a previous tem node to null. It will be used for the delete
+                Node previousTempNode = null;
 
                 //Start a counter to know if we have reached the position yet or not.
                 int count = 0;
@@ -102,8 +105,19 @@ namespace CIS237InClass4
                     //we would like to delete.
                     if (count == Position - 1)
                     {
-                        //Set the last node's next property to the tempnodes next property
-                        lastNode.Next = tempNode.Next;
+                        //Set the last node's Next property to the tempnodes Next property
+                        //Jumping over the tempNode. The previous node's next will now point
+                        //to the node AFTER the tempNode
+
+                        previousTempNode.Next = tempNode.Next;
+
+                        if (tempNode.Next == null)
+
+                        {
+                            last = previousTempNode;
+                        }
+
+
                         //remove the next pointer of the tempnode
                         tempNode.Next = null;
                         //return true because it was successful
@@ -115,7 +129,7 @@ namespace CIS237InClass4
 
                     //Set the lastNode equal to the tempNode. Now both variables are pointing to the
                     //exact same node.
-                    lastNode = tempNode;
+                    previousTempNode = tempNode;
 
                     //Now set the tempNode to tempNodes Next node. This will move tempNode
                     //one more location forward in the list.
@@ -127,9 +141,39 @@ namespace CIS237InClass4
             return false;
         }
 
+        //************************   10/20/2015   ************************************
 
+        public Node Retrive(int Position)
+        {
+            //Set the temp node to the Head so we are at the start of the list
+            Node tempNode = Head;
 
+            //A node that will be used to return the actual node we are looking for.
+            Node returnNode = null;
 
+            //Counter to see where we are in the list
+            int count = 0;
+
+            //While our tempnode is not at the end of the list
+            while (tempNode != null)
+            {
+                //If the count mataches the postion that we are looking for, we have found it
+                if (count == Position - 1)
+                {
+                    //Set the returnNode var to the tempNode, which is the one we were looking for
+                    returnNode = tempNode;  
+                    //Break out of the loop. NO need to keep looking.  
+                    break;
+                }
+                //Increase our counter since we haven't found it yet.
+                count++;
+                //Set the tempNode we are using for walking to the next node in the list
+                tempNode = tempNode.Next;
+
+            }
+            //return the returnNode
+            return returnNode;
+        }
 
     }
 }
