@@ -68,7 +68,45 @@ namespace CIS237InClass4
                 Console.WriteLine(x.Data);
             }
 
+            Console.WriteLine("*******************************");
+            Console.WriteLine("*******************************");
+
+
+
+            //A generic linked list that sends in the type that we would like to use
+            //This one will behave exactly like the one used above since it is taking a string.
+
+            GenericLinkedList<string> myGenericLinkedList = new GenericLinkedList<string>();
+
+            //Some other linked lists that can use the generic one. ONe of them is of type integer, 
+            //and the other one is type object
+            GenericLinkedList<int> myOtherGenericLinkedList = new GenericLinkedList<int>();
+
+            GenericLinkedList<object> myObjectGenericLinkedList = new GenericLinkedList<object>();
+
+
+            //Use the generic string one to do the same work as above
+
+            //add a bunch of stuff to it
+            myGenericLinkedList.Add("first_myGenericLinkedList");
+            myGenericLinkedList.Add("second_myGenericLinkedList");
+            myGenericLinkedList.Add("third_myGenericLinkedList");
+            myGenericLinkedList.Add("fourth_myGenericLinkedList");
+
+            //loop through with this differently looking for loop to output
+            //in here, the first part is initalization: setting x to the Head
+            //the second part is the test: if x != null, keep going
+            //the last part is : set the current x to x's next pointer.(The next in the list)
+            for (GenericNode<string> x = myGenericLinkedList.Head; x != null; x = x.Next)
+            {
+                Console.WriteLine(x.Data);
+            }
+
+
 
         }
+
+
+
     }
 }
